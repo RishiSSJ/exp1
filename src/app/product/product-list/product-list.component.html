@@ -1,0 +1,121 @@
+<body>
+    <div class="m-2 bg-secondary text-white text-center">
+        <h2>{{pageTitle}}</h2>
+    </div>
+
+    <!-- <div class="bg-info">
+        {{products | json}}
+    </div> -->
+
+    <!-- <h6>{{message}}</h6>
+
+    <div class="p-1">
+        <button class="btn btn-info btn-sm" (click)="toggleImage()">
+            {{showImage ? 'Hide' : 'Show'}} Image
+        </button>
+    </div> -->
+
+    <table class="mb-1">
+        <thead>
+            <tr>
+                <th>
+                    <button class="btn btn-success btn-sm ml-2" (click)="toggleImage()">
+                        {{showImage ? 'Hide' : 'Show'}} Image
+                    </button>
+                </th>
+                <th style="align-items: right">
+                    <h6>{{message}}</h6>
+                </th>
+            </tr>
+        </thead>
+    </table>
+
+    <table class="table table-dark table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th *ngIf="showImage">Images</th>
+                <th>Name</th>
+                <th>Product Code</th>
+                <th>Release Date</th>
+                <th>Price</th>
+                <th>Star Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let p of products; let i = index" 
+            [class.bg-warning] = "getSelected(p)"
+            (mouseover)="selectedProduct = p.productName">
+                <td>{{i+1}}</td>
+                <td *ngIf="showImage">
+                    <img 
+                    [src]="p.imageUrl" 
+                    [title]="p.productName" 
+                    [style.width.px]="imgWidth" 
+                    [style.margin.px]="imgMargin">
+                </td>
+                <td><a [routerLink]="['/products', p.id]">{{p.productName | uppercase}}</a></td>
+                <td>{{p.productCode | convertToSpaces: '-'}}</td>
+                <td>{{p.releaseDate | date: 'medium'}}</td>
+                <td>{{p.price | currency: 'INR' : 'symbol' : '1.2-2'}}</td>
+                <!-- <td>{{p.starRating}}</td> -->
+                <td><app-star [rating]="p.starRating" (ratingClicked)="onRatingClicked($event)"></app-star></td>
+            </tr>
+        </tbody>
+    </table>    
+
+    <div class="bg-primary text-dark p-2">
+        Selected Product = <span class="text-danger"><b>{{selectedProduct ?? 'None'}}</b></span>
+    </div>
+
+    <div class="form-group bg-secondary text-white">
+        <label>Product Name (One Way Bind)</label>
+        <input class="form-control" (input)="selectedProduct = $any($event).target.value"/>
+        <!-- TWO WAY BINDING -->
+        <label>Product Name (Two Way Bind)</label>
+        <input class="form-control" [(ngModel)] = "selectedProduct"/>
+    </div>
+    
+    <!-- <div class="form-group m-2">
+        <label>Name : </label>
+        <input class="form-control bg-secondary text-white" [value]="getProductById(13)?.productName ?? 'None' ">
+    </div> -->
+    
+    <!-- <div class="text-black">
+        <div [class]="getClasses(1)">
+            The first product is {{getProductById(1)?.productName}}
+        </div>
+    
+        <div [class]="getClasses(2)">
+            The second product is {{getProductById(2)?.productName}}
+        </div>
+
+        <div class="p-2" [ngClass]="getClassMap(3)">
+            The third product is {{getProductById(3)?.productName}}
+        </div> -->
+
+        <!-- CLASS BINDIN -->
+        <!-- <div class="p-2" 
+        [class.bg-success] = "(getProductById(4)?.price ?? 0) < 100 "
+        [class.bg-danger] = "(getProductById(4)?.price ?? 0) >= 100 ">
+            The forth product is {{getProductById(4)?.productName}}
+        </div>
+
+        <div class="p-2 bg-primary">
+            The first product is <span [style.fontSize]="fontSizeWithUnits">{{getProductById(1)?.productName}}</span>
+        </div>
+
+        <div class="p-2 bg-secondary">
+            The first product is <span [style.fontSize.px]="fontSizeWithoutUnits">{{getProductById(2)?.productName}}</span>
+        </div>
+
+        <div class="p-2 bg-info">
+            The third product is <span [ngStyle]="getStylesMap(3)">{{getProductById(3)?.productName}}</span>
+        </div>
+
+        <div class="p-2 bg-success">
+            The forth product is <span [ngStyle]="getStylesMap(4)">{{getProductById(4)?.productName}}</span>
+        </div>
+    </div>     -->
+    
+</body>

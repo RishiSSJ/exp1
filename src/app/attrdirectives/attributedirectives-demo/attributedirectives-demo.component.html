@@ -1,0 +1,63 @@
+<div class="row p-2">
+    <!-- To display the form -->
+    <div class="col-6">
+        <form class="m-2" (ngSubmit) ="submitForm()">
+            <div>
+                <h2 class="text-center">Add Product Form</h2>
+            </div>
+
+            <div>
+                <label>Name</label>
+
+                <input class="form-control" name="name" [(ngModel)] =newProduct.productName   />
+            </div>
+
+            <div>
+                <label>ProductCode</label>
+
+                <input class="form-control" name="code" [(ngModel)] =newProduct.productCode   />
+            </div>
+
+            <div>
+                <label>Price</label>
+
+                <input class="form-control" name="price" [(ngModel)] =newProduct.price   />
+            </div>
+
+            <div>
+                <label>Star Rating</label>
+
+                <input class="form-control" name="starRating" [(ngModel)] =newProduct.starRating   />
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-success mt-2 btn-lg btn-block">Add</button>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!-- To display the table of products -->
+    <div class="col-6">
+
+        <table class="table table-secondary table-striped table-bordered table-lg">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Product Code</th>
+                <th>Price</th>
+                <th>Star Rating</th>
+            </tr>
+
+            <tr *ngFor="let item of products; let i=index" [pa-attr]="products.length < 5 ? 'table-info' : 'table-warning' ">
+                <td>{{i+1}}</td>
+                <td class="text-success" pa-attr="table-info">{{item.productName}}</td>
+                <td class="text-primary" pa-attr="table-dark">{{item.productCode}}</td>
+                <td [pa-attr]="item.price > 100 ? 'bg-danger' : null ">{{item.price}}</td>
+                <td [pa-attr]="item.starRating > 4 ? 'table-primary' : null ">{{item.starRating}}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>

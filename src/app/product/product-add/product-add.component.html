@@ -1,0 +1,53 @@
+<h1>
+    Add a new Product
+</h1>
+<div>
+    <form [formGroup] = "formGroup" (ngSubmit)="saveProduct()" >
+        
+        <div class="form-group">
+            <label>Product Name</label>
+            <input class="form-control" formControlName="productName" placeholder/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['productName'].errors?.['required']">Name is required</div>
+        </div>
+
+        <div class="form-group">
+            <label>Product Code</label>
+            <input class="form-control" formControlName="productCode" placeholder/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['productCode'].errors?.['required']">Code is required</div>
+        </div>
+
+        <div class="form-group">
+            <label>Release Date</label>
+            <input class="form-control" formControlName="releaseDate" placeholder="Format(yyyy-mm-dd)"/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['releaseDate']"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Price</label>
+            <input class="form-control" formControlName="price" placeholder/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['price'].errors?.['required']">Price is required</div>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input class="form-control" formControlName="description" placeholder/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['description']"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Star Rating</label>
+            <input class="form-control" formControlName="starRating" placeholder/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['starRating'].errors?.['required']">Rating is required</div>
+        </div>
+
+        <div class="form-group">
+            <label>Image Url</label>
+            <input class="form-control" formControlName="imageUrl" placeholder/>
+            <div class="text-danger" *ngIf="this.formGroup.controls['imageUrl']"></div>
+        </div>
+
+        <button class="btn btn-success btn-lg mt-2" type="submit">Add</button>
+
+    </form>
+</div>
+

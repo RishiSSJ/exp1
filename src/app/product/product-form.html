@@ -1,0 +1,188 @@
+<style>
+    html,body{
+        height: 100%;
+    }
+    body{
+        margin: 0;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    /* input.ng-dirty.ng-invalid{border: 2px solid #ff0000}
+    input.ng-dirty.ng-valid{border: 2px solid #067118} */
+
+    /* When you want the colors to appear after you submit form */
+    form.ng-submitted input.ng-invalid{border: 2px solid #ff0000;}
+    form.ng-submitted input.ng-valid{border: 2px solid #049b06;}
+</style>
+
+<h1>{{pageTitle}}</h1>
+
+<div>
+    <div class="bg-info text-white mb-2 p-2">{{jsonProduct}}</div>
+
+    <form #form="ngForm" (ngSubmit)="submitForm(form)">
+        <!-- Display the validation summary -->
+        <div class = "bg-danger text-white p-2 mb-2" 
+        *ngIf="formSubmitted && form.invalid">
+
+            <ul>
+                <li *ngFor="let error of getFormValidationMessages(form)">
+                    {{error}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label>Name</label>
+
+            <input class="form-control"  [(ngModel)] =newProduct.productName 
+            name="productName" 
+            #productName="ngModel" 
+            required 
+            minlength = "5" 
+            pattern="^[A-Za-z]+$"
+            />
+
+            <ul class="text-danger list-unstyled mt-1"
+            *ngIf="productName.dirty && productName.invalid">
+            </ul>
+
+            <li *ngFor="let error of getValidationMessages(productName)">
+                {{error}}
+            </li>
+        </div>
+    
+        <div class="form-group">
+            <label>Price</label>
+
+            <input class="form-control"  [(ngModel)] =newProduct.price 
+            name="price" 
+            #price="ngModel" 
+            type="number"
+            required
+            />
+
+            <ul class="text-danger list-unstyled mt-1"
+            *ngIf="price.dirty && price.invalid">
+            </ul>
+
+            <li *ngFor="let error of getValidationMessages(price)">
+                {{error}}
+            </li>
+        </div>
+    
+        <div class="form-group">
+            <label>Star Rating</label>
+
+            <input class="form-control"  [(ngModel)] =newProduct.starRating 
+            name="starRating" 
+            #starRating="ngModel" 
+            required 
+            type="number"
+            max="5"
+            min="1"
+            required
+            />
+
+            <ul class="text-danger list-unstyled mt-1"
+            *ngIf="starRating.dirty && starRating.invalid">
+            </ul>
+
+            <li *ngFor="let error of getValidationMessages(starRating)">
+                {{error}}
+            </li>
+        </div>
+
+        <button class="btn btn-info btn-lg mt-2" type="submit"
+        [disabled]="formSubmitted && form.invalid"
+        [class.bg-dark]="formSubmitted && form.invalid">
+            Create
+        </button>
+    </form>
+</div>
+
+
+
+
+<!-- FORM 1 -->
+<!-- <div>
+    <div class="bg-info text-white mb-2 p-2">{{jsonProduct}}</div>
+
+    <form (ngSubmit)="addProduct(newProduct)">
+        <div class="form-group">
+            <label>Name</label>
+
+            <input class="form-control"  [(ngModel)] =newProduct.productName 
+            name="productName" 
+            #productName="ngModel" 
+            required 
+            minlength = "5" 
+            pattern="^[A-Za-z]+$"
+            />
+
+            <ul class="text-danger list-unstyled mt-1"
+            *ngIf="productName.dirty && productName.invalid">
+            </ul>
+
+            <li *ngFor="let error of getValidationMessages(productName)">
+                {{error}}
+            </li>
+
+            <li *ngIf="productName.errors?.['required']">
+                You must enter a product name.
+            </li>
+
+            <li *ngIf="productName.errors?.['minlength']">
+                Product name must be atleast {{productName.errors?.['minlength'].requiredLength}} characters
+            </li>
+
+            <li *ngIf="productName.errors?.['pattern']">
+                Product name can contain only letters and spaces
+            </li>
+        </div>
+    
+        <div class="form-group">
+            <label>Price</label>
+
+            <input class="form-control"  [(ngModel)] =newProduct.price 
+            name="price" 
+            #price="ngModel" 
+            type="number"
+            required
+            />
+
+            <ul class="text-danger list-unstyled mt-1"
+            *ngIf="price.dirty && price.invalid">
+            </ul>
+
+            <li *ngFor="let error of getValidationMessages(price)">
+                {{error}}
+            </li>
+        </div>
+    
+        <div class="form-group">
+            <label>Star Rating</label>
+
+            <input class="form-control"  [(ngModel)] =newProduct.starRating 
+            name="starRating" 
+            #starRating="ngModel" 
+            required 
+            type="number"
+            max="5"
+            min="1"
+            required
+            />
+
+            <ul class="text-danger list-unstyled mt-1"
+            *ngIf="starRating.dirty && starRating.invalid">
+            </ul>
+
+            <li *ngFor="let error of getValidationMessages(starRating)">
+                {{error}}
+            </li>
+        </div>
+    
+        <button class="btn btn-info btn-lg mt-2" type="submit">Create</button>
+    </form>
+
+</div> -->
